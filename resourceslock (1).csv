@@ -1,0 +1,3 @@
+﻿managementgroups,subscriptions,resourcegroups,resourcetypes
+Managementgrouptest,3bc8f069-65c7-4d08-b8de-534c20e56c38,"linux-VM, Windows-VM","Microsoft.Compute/virtualMachines,Microsoft.Network/networkInterfaces"
+managementtesing,95d6c462-6712-41f0-974a-956027bf3fc8,linux-testing,"Microsoft.Network/publicIPAddresses,Microsoft.Network/networkSecurityGroups"

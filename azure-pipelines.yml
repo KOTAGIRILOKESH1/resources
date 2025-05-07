@@ -1,0 +1,38 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+parameters:
+- name: lockOption
+  displayName: 'Lock Option'
+  type: string
+  default: 'lock'
+  values:
+    - lock
+    - unlock
+
+variables:
+  CsvPath: '$(Build.SourcesDirectory)\resourceslock.csv'
+
+jobs:
+- job: ManageLocks
+  displayName: 'Manage Azure Resource Locks'
+  pool:
+    vmImage: 'windows-latest'
+
+  steps:
+    - task: AzurePowerShell@5
+      inputs:
+        azureSubscription: 'svc-shellconnection'
+        ScriptType: 'FilePath'
+        ScriptPath: '$(Build.SourcesDirectory)\testing.ps1'
+        ScriptArguments: '-LockOption ${{ parameters.lockOption }} -CsvPath $(CsvPath)'
+        azurePowerShellVersion: 'LatestVersion'
+        pwsh: true
+
